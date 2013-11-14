@@ -60,6 +60,49 @@ chose to go ahead and go straight for B Functionality). We can initially trigger
 then switch the trigger to rising edge to detect the release. 
 
 
+The idea:
+For the delay: we can use the old delay code, but we need to use interrupts this time.
 
+Interrupts:
+They are efficient, do not delay code too long with less clock cycles needed to be implemented. Interrupts
+execute a pre defined subroutine based on an event, wake up the MSP430 from low-power mode, and interrupts 
+have priority (referrence from Lesson 27 notes). 1.) Clear the interrupt flag. 2.) Turn on the local switch.
+3.) Turn on global switch.
+
+_enable_interrupt() - enables maskable interrupts
+
+_disable_interrupt() - disables maskable interrupts 
+
+Write an ISR:
+include #pragma vector - loads address into interrupt vector table, clear interrupt flag, accomplish task
+
+P1 Interrupt:
+For buttons we want: 1 - high-to-low transition
+
+The reason for high to low transition on the P1 interrupt is that we want to trigger on the high, rising edge since
+we want to trigger right on the button push and not the release.
+
+Good Code To Use:
+Provided in Capt Branchflower's skeleton code for reference. I also reference C2C Tymchecko's and C2C Colin Busho's
+code. I envy those guys because they are very good at writing clean code as well as they really do help a lot
+in explaining code to me. 
+
+Timer A:
+Used to perform interval timing, used to put chip in low power state, waking up to take readings periodically. 
+
+TAR - Timer A Register, IDx - Allows us to slow down frequency by dividing it, TASSELx bits - select clock signal
+that Timer A counts off of. Count Mode - Specifies the way the timer counts.TACTL - controls most of the elements 
+of TIMER A. 
+
+Timer A can be used to poll the buttons, interrupt, move player, or display Game Over. This is sort of what I am
+thinking about. This could be useful for this function. 
+
+Final Part B Thoughts:
+Use the interrupt feature, ISR's, Much of the same as required, but make changes to coding/syntax in regards
+to delays and timers. 
+
+
+Part B Lab Coding (Day 1 and Day 2)
+===================================
 
 
