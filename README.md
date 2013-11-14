@@ -3,7 +3,7 @@ Lab5
 
 Updated Lab 5 Game
 
-The PreLab was accomplished in the lab notebook. The grade was given for the Pre-Lab in the Lab Notebook.
+The PreLab was accomplished in the lab notebook 05 November 2013. The grade was given for the Pre-Lab in the Lab Notebook.
 Code was created using Code Composer on the Desktop in the ECE 382 LAB.
 I ran into issues using Github on the desktop computer. Code Composer does not work on my school laptop
 and neither does gitbash.
@@ -105,4 +105,49 @@ to delays and timers.
 Part B Lab Coding (Day 1 and Day 2)
 ===================================
 
+To start off, I pulled up Capt Branchflower's skeleton code. This was very useful as it gave me a basis for
+where I will start writing my code and keeping it organized. I quickly noticed that Capt Branchflower wrote his 
+code with the intention of using Port 2, but I would rather use Port 1 to make wiring easier and it just makes more
+sense to me on the protoboard. Little did I know that this idea I had of using Port 1 would go ahead and make my 
+code have many errors in it.
+
+My idea was after the skeleton code to go ahead and think about what I need to get done. I need to use buttons, 
+set the clock speed to 1MHz, display on the LCD, as well as implement the game. I referenced Capt Branchflower's
+buttons library and I also referenced C2C Colin Busho's clock library. They were both better than my own in syntax
+and were very easy to see where I needed to make changes to my own code. 
+
+After obtaining the buttons library and referencing Colin's clock library, I had everything I needed. My first 
+action was getting the LCD to clear as well as writting string to the LCD. This was not so hard as LAB 4 sort of
+dealt with the same thing. My next motion was to figure out how I was going to use the buttons to move the player 
+across the screen. I had an idea. Since the top went from 0x80-0x87 and the botton from C0-C7, I decided that 
+left and right could be easy to do. If less than seven, move right, if greater than 0, move left. This took some
+thinking about, but in the end it all worked out. As far as up and down, I decided I would just set BIT6 for when 
+we move up and then set it to 0 for down. This was simple. I started running into issues with how I was going to implemet the delays. I knew that I needed to use interrupts,
+but how was I going to do that. I decided that in the main.c file, I would declare variables. An idea would be
+set Game Over == 0 should we be reset, if not then keep Game Over == 1 to continue toggling the Game Over until
+a button is pushed or the reset button is used. 
+
+I decided that I would toggle all of the buttons to test if they were pushed in the interrupt. The reset button
+was taken care of earlier. 
+
+After writing the code I started running into many errors. I had many functions declaed implicitly. I forgot to 
+declare some functions in the header file as well as before I used them in the main.c file. I also had errors with 
+my port use. I still had in some areas Port 2 coded in where I needed Port 1. These contradictions just did not 
+allow me to use the buttons at all. Once these items were fixed, I was able to get the game to display on the LCD, but
+I was still running into issues. I had many warning about more functions being declared implicitly and sometimes it was
+as simple as a capitalized letter or not having a semi-colon somewhere.
+
+Capt Branchflower looked at my code and helped me to figure out some of my mistakes. After fixing of what seemed like 
+20 minor syntax errors or missing semi-colons, I was able to get the game to work. The game was working sort of fast
+so I decided to throw in a long delay after You Won and Game Over. This allows for proper time for the player to view
+this conclusion screen.
+
+In the end I achieved B Functionality with the help of a few of my class mates and Capt Branchflower. I really did not
+have a great grasp on C programming during the assignments, but this lab helped me out alot with programming in C. 
+
+B Functionality was achieved and signed off on 07 November 2013. 
+
+
+Analysis
+========
 
